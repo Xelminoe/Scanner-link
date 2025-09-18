@@ -1,17 +1,19 @@
 // ==UserScript==
-// @id           scanner-link-copy@xMAXIMx
-// @name         IITC plugin: Scanner link-copy
-// @version      0.2.1
-// @description  Adds scanner link (copy mode) to IITC
-// @author       xMAXIMx
-// @category     Info
-// @include      *://*.ingress.com/*
-// @match        *://*.ingress.com/*
+// @author         xMAXIMx
+// @id             scanner-link-copy@xMAXIMx
+// @name           Scanner link-copy
+// @version        0.2.1.1
+// @description    Adds scanner link (copy mode) to IITC
+// @category       Info
+// @updateURL      https://raw.githubusercontent.com/IITC-CE/Community-plugins/master/dist/xMAXIMx/scanner-link-copy.meta.js
+// @downloadURL    https://raw.githubusercontent.com/IITC-CE/Community-plugins/master/dist/xMAXIMx/scanner-link-copy.user.js
+// @include        *://*.ingress.com/*
+// @match          *://*.ingress.com/*
 // ==/UserScript==
 function wrapper(plugin_info) {
   if(typeof window.plugin !== 'function') window.plugin = function(){};
   window.plugin.scannerLinkCopy = function () {};
-  window.plugin.scannerLinkCopy.portalInfo = function () {$('.linkdetails').append('<aside><a id="scannerLinkCopy" target="_blank" onclick="window.plugin.scannerLinkCopy.copyLink(\'https://link.ingress.com/?link=https%3A%2F%2Fintel.ingress.com%2Fportal%2F' + window.selectedPortal + '&apn=com.nianticproject.ingress&isi=576505181&ibi=com.google.ingress&ifl=https%3A%2F%2Fapps.apple.com%2Fapp%2Fingress%2Fid576505181&ofl=https%3A%2F%2Fintel.ingress.com%2Fintel%3Fpll%3D' + window.portals[window.selectedPortal]._latlng.lat + '%2C' + window.portals[window.selectedPortal]._latlng.lng + '\')">Copy Scanner Link</a></aside>');};
+  window.plugin.scannerLinkCopy.portalInfo = function () {$('.linkdetails').append('<aside><a id="scannerLinkCopy" target="_blank" onclick="window.plugin.scannerLinkCopy.copyLink(\'https://link.ingress.com/portal/' + window.selectedPortal + '\')">Copy New Scanner Link</a></aside>');};
   window.plugin.scannerLinkCopy.copyLink = function (link){if (typeof android !== "undefined") {androidCopy(link);}else{navigator.clipboard.writeText(link);}}
   function setup() {window.addHook('portalDetailsUpdated', window.plugin.scannerLinkCopy.portalInfo);}
   setup.info = plugin_info;
